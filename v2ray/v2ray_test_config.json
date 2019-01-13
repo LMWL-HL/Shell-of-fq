@@ -1,0 +1,95 @@
+{
+	"log":
+	{
+		"loglevel": "warning", //日志级别
+		"access": "", //日志路径
+		"error": ""
+	},
+	"inbounds":[
+	{
+		"port": 1080, //监听端口
+		"listen": "127.0.0.1",
+		"protocol": "socks", //入口协议为 SOCKS 5
+		"domainOverride":["tls","http"],
+		"settings":
+		{
+			"auth": "noauth", //socks的认证设置，noauth代表不认证，由于socks通常在客户端使用，所以这里不认证
+			"udp": false
+		}
+	}
+	],
+	"outbounds":[
+	{
+		"protocol":"vmess", //出口协议
+		"settings":
+		{
+			"vnext":[
+			{
+				"address": "?????????????", //服务器地址
+				"port": ?????????, //服务器端口
+				"users":[
+				{
+					"id": "?????????????????", //用户ID，必须与服务器端配置相同
+					"level": 1,
+					"alterId": 64 //此处的值也应当与服务器相同
+				}
+				]
+			}
+			]
+		},
+		"streamSettings":
+		{
+			"network": "ws",
+			"security": "tls"
+		}
+	},
+	{
+		"protocol": "freedom",
+		"settings":{},
+		"tag": "direct"
+	},
+	{
+		"protocol": "blackhole",
+		"settings": {},
+		"tag": "adblock"
+	}
+	],
+	"routing":
+	{
+		"domainStrategy": "IPOnDemand",
+		"rules":[
+		{
+			"domain":[
+				"tanx.com",
+				"googeadsserving.cn"
+			],
+			"type": "field",
+			"outboundTag": "adblock"
+		},
+		{
+			"domain":[
+				"amazon.com",
+				"microsoft.com",
+				"jd.com",
+				"youku.com",
+				"baidu.com"
+			],
+			"type": "field",
+			"outboundTag": "direct"
+		},
+		{
+			"type": "field",
+			"outboundTag": "direct",
+			"domain": ["geosite:cn"] //中国大陆主流网站的域名
+		},
+		{
+			"type": "field",
+			"outboundTag": "direct",
+			"ip":[
+				"geoip:cn", //中国大陆的IP
+				"geoip:private" //私有地址IP，如路由器等
+			]
+		}
+		]
+	}
+}
