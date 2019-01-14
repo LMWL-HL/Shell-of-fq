@@ -1,4 +1,10 @@
 import re
+import os
+
+yaddr = input("你的域名： ")
+cmd = ["apt-get install socat","curl https://get.acme.sh | sh","source ~/.bashrc","~/.acme.sh/acme.sh --issue -d "+yaddr+" --standalone -k ec-256","~/.acme.sh/acme.sh --installcert -d "+yaddr+" --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc"]
+for cm in cmd:
+    os.system(cm)
 
 f1 = open("config_vps.json")
 l1 = f1.read()
