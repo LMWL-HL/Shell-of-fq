@@ -1,17 +1,11 @@
 import re
 import os
+import json
 
 yaddr = input("你的域名： ")
 cmd = ["apt-get install socat","curl https://get.acme.sh | sh","source ~/.bashrc","~/.acme.sh/acme.sh --issue -d "+yaddr+" --standalone -k ec-256","~/.acme.sh/acme.sh --installcert -d "+yaddr+" --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc"]
 for cm in cmd:
     os.system(cm)
-
-f1 = open("config_vps.json")
-l1 = f1.read()
-f1.close()
-
-l2 = l1.split("\n")
-l3 = l1.split("\n")
 
 while True:
     try:
@@ -34,18 +28,12 @@ yid = lis(yid)
 del yid[-1]
 yid = "".join(yid)
 
-for i in l2:
-    if re.search("\?+",i) is not None:
-        if re.search("port",i) is not None:
-            ind = l2.index(i)
-            del l3[ind]
-            l3.insert(ind,"    \t\t\"port\": "+str(yport)+",")
-        if re.search("id",i) is not None:
-            ind = l2.index(i)
-            del l3[ind]
-            l3.insert(ind,"          \t\t\t\t\t\"id\": \""+yid+"\",")
+load_f = open("config_vps.json","r",encoding="utf-8")
+load_dict = json.load(load_f)
+load_dict["inbounds"][0]["port"] = str(yport)
+load_dict["inbounds"][0]["settings"]["clients"][0]["id"] = yid
+load_f.close()
 
-l4 = "\n".join(l3)
-f2 = open("config.json","w",encoding="utf-8")
-f2.write(l4)
-f2.close()
+load_f = open("config_vps.json","w",encoding="utf-8")
+json.dump(load_dict,load_f)
+load_f.close()
