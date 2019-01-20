@@ -25,7 +25,14 @@ while True:
         print("请输入数字！")
         continue
     
-yid = input("你的id：")
+i = os.popen("cat /proc/sys/kernel/random/uuid")
+global yid
+yid = 0
+for d in i:
+    yid = d
+yid = lis(yid)
+del yid[-1]
+yid = "".join(yid)
 
 for i in l2:
     if re.search("\?+",i) is not None:
