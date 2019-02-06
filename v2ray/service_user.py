@@ -24,9 +24,10 @@ global yid
 yid = 0
 for d in i:
     yid = d
-yid = lis(yid)
+yid = list(yid)
 del yid[-1]
 yid = "".join(yid)
+yid = "fkdjsailfjdl"
 
 load_f = open("config_vps.json","r",encoding="utf-8")
 load_dict = json.load(load_f)
