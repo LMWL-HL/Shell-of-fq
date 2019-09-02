@@ -5,7 +5,7 @@
    "kcpSettings": null, 
    "wsSettings": {
     "headers": {
-     "host": "gc.hulan-lmwl.ml"
+     "host": "HostReplace"
     }, 
     "path": ""
    }, 
@@ -28,7 +28,7 @@
       }
      ], 
      "port": 443, 
-     "address": "gc.hulan-lmwl.ml"
+     "address": "HostReplace"
     }
    ]
   }
