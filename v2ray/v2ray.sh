@@ -4,7 +4,7 @@
 echo "输入你的域名："
 read HOST
 UUID=`cat /proc/sys/kernel/random/uuid`
-PORT=$((RANDOM + 1024))
+PORT=`echo $((RANDOM + 1024))`
 
 # v2ray install
 bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
