@@ -53,7 +53,7 @@ lsmod | grep bbr > /dev/null
 if [[ $? != 0 ]]; then
   bash <(wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh)
 else
-  echo "bbr installed!"
+  echo "bbr already installed!"
 fi
 
 # start v2ray.service
