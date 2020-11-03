@@ -4,7 +4,7 @@
 echo "输入你的域名："
 read HOST
 UUID=`cat /proc/sys/kernel/random/uuid`
-PORT=52000
+PORT=$((RANDOM + 1024))
 
 # v2ray install
 bash <(curl -L https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh)
@@ -44,7 +44,7 @@ sed -i "s/\"PortReplace\"/$PORT/g" client.json
 sed -i "s/IdReplace/$UUID/g" client.json
 
 sed -i "s/HostReplace/$HOST/g" server.json
-sed -i "s/\"PortReplace\"/$PROT/g" server.json
+sed -i "s/\"PortReplace\"/$PORT/g" server.json
 sed -i "s/IdReplace/$UUID/g" server.json
 cp server.json /usr/local/etc/v2ray/config.json
 
