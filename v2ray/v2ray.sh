@@ -35,7 +35,7 @@ install_cert_file(){
     install -m 644 -o root -g root $CERTPATH/$HOST/fullchain.pem -t $V2RAYCERTPATH
     install -m 644 -o root -g root $CERTPATH/$HOST/privkey.pem -t $V2RAYCERTPATH
     cp deploy.sh /etc/letsencrypt/renewal-hooks/deploy/v2ray.sh
-    echo $SHCONTENT > /etc/letsencrypt/renewal-hooks/deploy/v2ray.sh
+    echo -e $SHCONTENT > /etc/letsencrypt/renewal-hooks/deploy/v2ray.sh
     chmod +x /etc/letsencrypt/renewal-hooks/deploy/v2ray.sh
 }
 
