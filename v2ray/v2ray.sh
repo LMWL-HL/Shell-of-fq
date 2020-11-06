@@ -67,6 +67,17 @@ start_v2ray(){
     systemctl start v2ray.service
 }
 
+print_config(){
+    echo "服务器地址: $HOST"
+    echo "端口(port): $PORT"
+    echo "用户ID: $UUID"
+    echo "额外id: 64"
+    echo "加密方式: auto"
+    echo "传输协议: ws"
+    echo "伪装协议: none"
+    echo "底层传输安全: tls"
+}
+
 main(){
     read_info
     install_v2ray
