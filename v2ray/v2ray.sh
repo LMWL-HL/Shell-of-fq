@@ -85,6 +85,7 @@ main(){
     modify_config
     check_and_install_bbr
     start_v2ray
+    print_config
 }
 
 main "$@"
