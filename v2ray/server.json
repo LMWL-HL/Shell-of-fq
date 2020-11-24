@@ -1,16 +1,37 @@
 {
     "log": {
-        "loglevel": "warning"
+        "loglevel": "warning",
+        "access": "/var/log/v2ray/access.log",
+        "error": "/var/log/v2ray/error.log"
     },
     "routing": {
         "domainStrategy": "AsIs",
         "rules": [
             {
                 "type": "field",
+                "outboundTag": "block",
                 "ip": [
-                    "geoip:private"
-                ],
-                "outboundTag": "block"
+                    "geoip:private",
+                    "geoip:cn",
+                    "223.5.5.5/32",
+                    "119.29.29.29/32",
+                    "180.76.76.76/32",
+                    "114.114.114.114/32"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "block",
+                "domain": [
+                    "geosite:cn"
+                ]
+            },
+            {
+                "type": "field",
+                "outboundTag": "block",
+                "domain": [
+                    "geosite:category-ads-all"
+                ]
             }
         ]
     },
